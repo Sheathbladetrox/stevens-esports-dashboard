@@ -477,7 +477,7 @@ router.patch('/user', upload.single('avatar'), async (req, res) => {
   try{
       const updatedUser = await users.updateUser(req.session.user._id.toString(), userInfo);
       //prob want to send the user back to profile page 
-      req.session.destroy();
+      req.session = null;
       return res.sendStatus(200);
   } catch(e){
       res.status(400).json({ error: e });
@@ -564,7 +564,7 @@ router.patch('/user/password', upload.single('avatar'), async (req, res) => {
   
   try{
       const updatedUser = await users.updateUser(req.session.user._id.toString(), userInfo);
-      req.session.destroy();
+      req.session = null;
       return res.sendStatus(200);
   } catch(e){
       res.status(400).json({ error: e });
@@ -574,7 +574,7 @@ router.patch('/user/password', upload.single('avatar'), async (req, res) => {
 router.delete("/delete-user", async (req, res) => {
   try{
     const deletedUser = await users.deleteUser(req.session.user._id.toString());
-    req.session.destroy();
+    req.session = null;
     return res.sendStatus(200);
   } catch(e){
     res.status(400).json({ error: e });
@@ -596,7 +596,7 @@ router.get("/dashboard", async (req, res) => {
 });
 
 router.get("/logout", (req, res) => {
-  req.session.destroy();
+  req.session = null;
   res.redirect("/login");
 });
 
