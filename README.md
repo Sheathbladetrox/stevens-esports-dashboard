@@ -1,4 +1,4 @@
-# CS-546 Final Project
+# CS-546 (Web Development I) Final Project
 
 ## About
 
